@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+<Description about="urn:mozilla:install-manifest">
+	<em:id>clipreference2_y@kitori.umauma</em:id>
+	<em:type>2</em:type>
+	<em:name>Clip Reference</em:name>
+	<em:version>1.5</em:version>
+	<em:creator>yuic</em:creator>
+	<em:description>Open the menu when you select text on browser. And display page in tiny browsers when select these menus.</em:description>
+	<em:bootstrap>true</em:bootstrap>
+	<em:optionsURL>chrome://clipreference/content/pref.xul</em:optionsURL>
+	<em:iconURL>chrome://clipreference/content/icon/circuit_g.png</em:iconURL>
+
+	<em:localized>
+		<Description>
+			<em:locale>ja</em:locale>
+			<em:name>Clip Reference</em:name>
+			<em:description>テキスト選択時にメニューを表示します。メニューを選択すると内容を小さなブラウザで表示します。</em:description>
+			<em:creator>yuic</em:creator>
+		</Description>
+		<Description>
+			<em:locale>en-US</em:locale>
+			<em:name>Clip Reference</em:name>
+			<em:description>Open the menu when you select text on browser. And display page in tiny browser when select these menus.</em:description>
+			<em:creator>yuic</em:creator>
+		</Description>
+	</em:localized>
+
+	<em:targetApplication>
+		<Description>
+			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+			<em:minVersion>17.0</em:minVersion>
+			<em:maxVersion>20.0a2</em:maxVersion>
+		</Description>
+	</em:targetApplication>
+
+</Description>
+</RDF>

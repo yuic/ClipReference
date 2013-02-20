@@ -1,0 +1,254 @@
+<?xml version="1.0"?>
+<!DOCTYPE overlay SYSTEM "chrome://clipreference/locale/pref.dtd">
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<?xml-stylesheet href="chrome://clipreference/content/clipreference.css" type="text/css"?>
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	id="CLRF_prefWin"
+	title="&pref.window.title;"
+	buttons="accept, cancel"
+	ondialogaccept="Pref.userAcceptWin = true;"
+	onload="Pref.load();"
+	onunload="Pref.unload();" >
+
+	<!-- 一般ペイン -->
+	<prefpane id="generalPane" label="&pref.general.paneLabel;">
+	<notificationbox id="boxNotifyG" flex="1">
+
+		<!-- 表示のしかた -->
+		<groupbox align="start">
+			<caption label="&pref.general.disp.caption;"/>
+			<checkbox id="alwaysMinimum"  label="&pref.general.disp.alwaysMinimum;"/>
+			<checkbox id="displayLabel"   label="&pref.general.disp.displayLabel;"/>
+			<checkbox id="minMoveFree"    label="&pref.general.disp.minMoveFree;"/>
+			<checkbox id="enableTxtField" label="&pref.general.disp.enableTxtField;"/>
+		</groupbox>
+
+		<!-- 閉じるタイミング -->
+		<groupbox>
+			<caption label="&pref.general.close.caption;"/>
+			<hbox align="center">
+				<label value="&pref.general.close.description1;"/>
+					<textbox id="menuToClose" type="number" min="0" max="9999" increment="1" decimalplaces="0" size="4" sizetopopup="always" style="width:60px;"/>
+				<label value="&pref.general.close.description2;" />
+			</hbox>
+		</groupbox>
+
+		<!-- メニュー選択時の挙動 -->
+		<groupbox >
+			<caption label="&pref.general.behavior.caption;"/>
+			<hbox>
+				<grid style="border: inset ButtonShadow 1px;" onselect="Pref.tabOpenPosChanged(event);">
+					<columns> <column/> <column/> <column/> </columns>
+					<rows>
+						<row>
+							<listheader label="&pref.general.behavior.mousebutton;" />
+							<listheader label="&pref.general.behavior.behavior;" />
+							<listheader label="&pref.general.behavior.activatetab;" />
+						</row>
+
+						<row align="center">
+							<label value="&pref.general.behavior.primarybutton;" />
+							<menulist id="behavior0" sizetopopup="always">
+								<menupopup>
+									<menuitem label="---" value="0" />
+									<menuitem label="&pref.general.behavior.changeSize;"  value="1" />
+									<menuitem label="&pref.general.behavior.newtabright;" value="2" />
+									<menuitem label="&pref.general.behavior.newtabend;"   value="3" />
+									<menuitem label="&pref.general.behavior.newwindow;"   value="4" />
+								</menupopup>
+							</menulist>
+							<hbox><spacer flex="1"/><checkbox id="openTabActivate0"/><spacer flex="1"/></hbox>
+						</row>
+
+						<row align="center">
+							<label value="&pref.general.behavior.middlebutton;"/>
+							<menulist id="behavior1"  sizetopopup="always">
+								<menupopup>
+									<menuitem label="---" value="0" />
+									<menuitem label="&pref.general.behavior.changeSize;"  value="1" />
+									<menuitem label="&pref.general.behavior.newtabright;" value="2" />
+									<menuitem label="&pref.general.behavior.newtabend;"   value="3" />
+									<menuitem label="&pref.general.behavior.newwindow;"   value="4" />
+								</menupopup>
+							</menulist>
+							<hbox><spacer flex="1"/><checkbox id="openTabActivate1"/><spacer flex="1"/></hbox>
+						</row>
+
+						<row align="center">
+							<label value="&pref.general.behavior.secondarybutton;"/>
+							<menulist id="behavior2"  sizetopopup="always">
+								<menupopup>
+									<menuitem label="---" value="0" />
+									<menuitem label="&pref.general.behavior.changeSize;"  value="1" />
+									<menuitem label="&pref.general.behavior.newtabright;" value="2" />
+									<menuitem label="&pref.general.behavior.newtabend;"   value="3" />
+									<menuitem label="&pref.general.behavior.newwindow;"   value="4" />
+								</menupopup>
+							</menulist>
+							<hbox><spacer flex="1"/><checkbox id="openTabActivate2"/><spacer flex="1"/></hbox>
+						</row>
+
+					</rows>
+				</grid>
+			</hbox>
+		</groupbox>
+
+
+		<!-- ブラウザで開くボタン押下時の挙動 -->
+		<groupbox >
+			<caption label="&pref.general.behaviorB.caption;"/>
+			<hbox align="center" onselect="Pref.tabOpenPosChanged(event);">
+				<menulist id="behaviorB" sizetopopup="always">
+					<menupopup>
+						<menuitem label="&pref.general.behavior.newtabright;" value="2"/>
+						<menuitem label="&pref.general.behavior.newtabend;" value="3"/>
+						<menuitem label="&pref.general.behavior.newwindow;" value="4"/>
+					</menupopup>
+				</menulist>
+				<hbox><spacer flex="1"/><checkbox id="openTabActivateB" label="&pref.general.behavior.activatetab;"/><spacer flex="1"/></hbox>
+			</hbox>
+			<description>&pref.general.behaviorB.description;</description>
+		</groupbox>
+
+		<spacer height="15" />
+
+		<!-- デフォルトの復元 -->
+		<groupbox>
+			<caption label="&pref.general.restore.caption;"/>
+			<hbox align="center">
+				<button id="restoreBtn" image="chrome://clipreference/content/icon/locked_g.ico" label=" &pref.general.restore.button;" type="menu-button" oncommand="Pref.doRestore(event);">
+					<menupopup >
+						<menuitem id="restoreGuard" type="checkbox" checked="true"
+							label="&pref.general.restore.protect;" oncommand="Pref.guardRestore(event);"/>
+					</menupopup>
+				</button>
+				<spacer width="20" />
+				<vbox >
+					<label value="&pref.general.restore.description1;" />
+					<label value="&pref.general.restore.description2;" />
+				</vbox>
+			</hbox>
+		</groupbox>
+
+	</notificationbox>
+	</prefpane>
+
+	<!-- メニュー項目ペイン -->
+	<prefpane id="menuitemsPane" label="&pref.menu.paneLabel;" flex="1" >
+	<notificationbox id="boxNotifyM" flex="1">
+
+		<!-- メニュー項目ツリー -->
+		<groupbox flex="1">
+			<caption label="&pref.menu.tree.caption;"/>
+			<tree id="cmdtree" flex="1" editable="true" enableColumnDrag="true" seltype="single" width="510" height="430"
+					onselect="Pref.itemSelected(event);" onmousemove="treeView.moveCursor(event);">
+				<treecols>
+					<treecol id="icon" flex="1"/>								<splitter class="tree-splitter" />
+					<treecol id="name" label="&pref.menu.tree.name;" flex="2"/>	<splitter class="tree-splitter" />
+					<treecol id="url" label="&pref.menu.tree.url;" flex="20"/>	<splitter class="tree-splitter" />
+					<treecol id="isScript" label="&pref.menu.tree.isScript;"
+						type="checkbox" editable="true" flex="0"/>				<splitter class="tree-splitter" />
+					<treecol id="delete" label="&pref.menu.tree.delete;" flex="0"/>
+				</treecols>
+				<treechildren ondragstart="treeView.dragStart(event);" onclick="treeView.clicked(event);" ondblclick="treeView.dblclicked(event);" />
+			</tree>
+		</groupbox>
+
+		<!-- ポップアップの詳細 -->
+		<vbox id="detailArea" collapsed="true">
+			<hbox>
+
+				<vbox flex="1">
+					<!-- 展開時のポップアップサイズ -->
+					<groupbox flex="1">
+						<caption label="&pref.menu.detail.size.caption;" />
+						<grid>
+						 	<columns> <column/> <column/> </columns>
+							<rows>
+								<row align="center">
+									<label value="&pref.menu.detail.size.width;"/>
+										<textbox id="width" type="number" min="0" max="9999" increment="1" decimalplaces="0" size="4" style="width:60px;"/>
+											<label value="px"/>
+								</row>
+								<row align="center">
+									<label value="&pref.menu.detail.size.height;"/>
+										<textbox id="height" type="number" min="0" max="9999" increment="1" decimalplaces="0" size="4" style="width:60px;"/>
+											<label value="px"/>
+								</row>
+							</rows>
+						</grid>
+					</groupbox>
+
+					<!-- 展開時のデフォルト設定 -->
+					<groupbox flex="1">
+						<caption label="&pref.menu.detail.default.caption;" />
+						<vbox align="start">
+							<checkbox id="defaultPin"  label="&pref.menu.detail.default.pin;" />
+							<checkbox id="defaultSync" label="&pref.menu.detail.default.sync;" />
+						</vbox>
+						<hbox align="center">
+							<label value="&pref.menu.detail.default.zoom;" />
+								<textbox id="defaultZoom" type="number" min="-9999" max="9999" increment="1" decimalplaces="0" size="3" style="width:60px;"/>
+									<label value="%"/>
+						</hbox>
+					</groupbox>
+				</vbox>
+
+				<vbox flex="2">
+					<!-- xpath -->
+					<groupbox>
+						<caption label="&pref.menu.detail.xpath.caption;" />
+						<hbox align="center"><textbox id="xpath" flex="1"/></hbox>
+					</groupbox>
+
+					<!-- ポップアップする位置 -->
+					<groupbox>
+						<caption label="&pref.menu.detail.pos.caption;" />
+						<vbox>
+							<groupbox >
+								<caption label="&pref.menu.detail.pos.minimized;  (&pref.menu.detail.pos.min.description;)"/>
+								<hbox align="center">
+									<label value="&pref.menu.detail.pos.min.rightward;"/>
+										<textbox id="posX_min" type="number" min="-9999" max="9999" increment="1" decimalplaces="0" size="4" style="width:60px;"/>
+											<label value="px"/>
+									<spacer width="10"/>
+									<label value="&pref.menu.detail.pos.min.downward;"/>
+										<textbox id="posY_min" type="number" min="-9999" max="9999" increment="1" decimalplaces="0" size="4" style="width:60px;"/>
+											<label value="px"/>
+								</hbox>
+							</groupbox >
+							<groupbox >
+								<caption label="&pref.menu.detail.pos.expand;  (&pref.menu.detail.pos.exp.description;)"/>
+								<hbox align="center">
+									<label value="&pref.menu.detail.pos.exp.rightward;"/>
+										<textbox id="posX_def" type="number" min="0" max="9999" increment="1" decimalplaces="0" size="4" style="width:60px;"/>
+											<label value="px"/>
+									<spacer width="10"/>
+									<label value="&pref.menu.detail.pos.exp.downward;"/>
+										<textbox id="posY_def" type="number" min="0" max="9999" increment="1" decimalplaces="0" size="4" style="width:60px;"/>
+											<label value="px"/>
+								</hbox>
+							</groupbox >
+						</vbox>
+					</groupbox>
+				</vbox>
+
+			</hbox>
+		</vbox>
+
+		<!-- 詳細ペイントグルボタンとURL無しは登録されませんよ -->
+		<hbox >
+			<button type="checkbox" label=" &pref.menu.detailtoggle;" image="chrome://global/skin/icons/collapse.png" onclick="Pref.switchDetail(event)"/>
+			<spacer flex="1"/>
+			<label value="&pref.menu.description;" />
+		</hbox>
+
+	</notificationbox>
+	</prefpane>
+
+	<script type="application/x-javascript" src="chrome://clipreference/content/util.js" />
+	<script type="application/x-javascript" src="chrome://clipreference/content/storage.jsm" />
+	<script type="application/x-javascript" src="chrome://clipreference/content/pref.js" />
+
+</prefwindow>

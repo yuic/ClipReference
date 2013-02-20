@@ -1,0 +1,69 @@
+<!ENTITY pref.window.title "clipreferenceの設定">
+
+<!ENTITY pref.general.paneLabel "一般">
+	<!ENTITY pref.general.disp.caption             "表示のしかた">
+	<!ENTITY pref.general.disp.alwaysMinimum       "常に最小化状態でポップアップする">
+	<!ENTITY pref.general.disp.displayLabel        "最小化状態のポップアップにメニュー名を表示する">
+	<!ENTITY pref.general.disp.minMoveFree         "最小化状態のポップアップをドラッグで移動可能にする">
+	<!ENTITY pref.general.disp.enableTxtField      "テキストフィールドの文字を選択したときもポップアップする">
+
+	<!ENTITY pref.general.close.caption            "ポップアップが自動的に閉じるタイミング">
+	<!ENTITY pref.general.close.description1       "ポップアップからカーソルが離れた状態で">
+	<!ENTITY pref.general.close.description2       "ミリ秒経過したら閉じる">
+
+	<!ENTITY pref.general.behavior.caption         "最小化されたポップアップをクリックしたときの挙動">
+	<!ENTITY pref.general.behavior.mousebutton     "クリックするボタン">
+	<!ENTITY pref.general.behavior.behavior        "挙動">
+	<!ENTITY pref.general.behavior.activatetab     "タブをアクティブにする">
+	<!ENTITY pref.general.behavior.primarybutton   "主ボタン">
+	<!ENTITY pref.general.behavior.middlebutton    "ホイールボタン">
+	<!ENTITY pref.general.behavior.secondarybutton "副ボタン">
+	<!ENTITY pref.general.behavior.changeSize      "ポップアップのサイズ切替">
+	<!ENTITY pref.general.behavior.newtabright     "新しいタブで開く(右隣)">
+	<!ENTITY pref.general.behavior.newtabend       "新しいタブで開く(末尾)">
+	<!ENTITY pref.general.behavior.newwindow       "新しいウィンドウで開く">
+
+	<!ENTITY pref.general.behaviorB.caption        "「ブラウザで開く」ボタン押下時の挙動">
+	<!ENTITY pref.general.behaviorB.description    "*この設定はポップアップ上のリンクをホイールクリックしたときの動作にも適用されます。">
+
+	<!ENTITY pref.general.restore.caption          "デフォルトの復元">
+	<!ENTITY pref.general.restore.button           "復元">
+	<!ENTITY pref.general.restore.protect          "誤操作保護">
+	<!ENTITY pref.general.restore.description1     "現在の設定を破棄し、配布時の状態を復元します。">
+	<!ENTITY pref.general.restore.description2     "この操作はキャンセルできません。">
+
+
+<!ENTITY pref.menu.paneLabel "ポップアップ項目">
+	<!ENTITY pref.menu.tree.caption                "ポップアップ項目">
+	<!ENTITY pref.menu.tree.name                   "ポップアップ名">
+	<!ENTITY pref.menu.tree.url                    "URL/SCRIPT">
+	<!ENTITY pref.menu.tree.isScript               "スクリプト?">
+	<!ENTITY pref.menu.tree.delete                 "x">
+
+	<!ENTITY pref.menu.detail.pos.caption          "ポップアップする位置">
+	<!ENTITY pref.menu.detail.pos.minimized        "最小化時">
+	<!ENTITY pref.menu.detail.pos.min.description  "マウスカーソルからの相対位置">
+	<!ENTITY pref.menu.detail.pos.min.rightward    "右方向：">
+	<!ENTITY pref.menu.detail.pos.min.downward     "下方向：">
+
+	<!ENTITY pref.menu.detail.pos.expand           "展開時">
+	<!ENTITY pref.menu.detail.pos.exp.description  "画面上での絶対位置">
+	<!ENTITY pref.menu.detail.pos.exp.rightward    "右方向：">
+	<!ENTITY pref.menu.detail.pos.exp.downward     "下方向：">
+
+	<!ENTITY pref.menu.detail.size.caption         "展開時のポップアップサイズ">
+	<!ENTITY pref.menu.detail.size.width           "幅：">
+	<!ENTITY pref.menu.detail.size.height          "高さ：">
+
+	<!ENTITY pref.menu.detail.default.caption      "デフォルト設定">
+	<!ENTITY pref.menu.detail.default.pin          "ピン留め">
+	<!ENTITY pref.menu.detail.default.sync         "選択状態の文字と同期">
+	<!ENTITY pref.menu.detail.default.zoom         "ズーム：">
+
+	<!ENTITY pref.menu.detail.xpath.caption        "XPath">
+
+	<!ENTITY pref.menu.detailtoggle                "ポップアップの詳細">
+	<!ENTITY pref.menu.description                 "URL/SCRIPTフィールドが空の項目は登録されません">
+
+<!ENTITY editor.window.title "スクリプトの編集">
+
