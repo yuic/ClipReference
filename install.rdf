@@ -4,7 +4,7 @@
 	<em:id>clipreference2_y@kitori.umauma</em:id>
 	<em:type>2</em:type>
 	<em:name>Clip Reference</em:name>
-	<em:version>1.5</em:version>
+	<em:version>1.6</em:version>
 	<em:creator>yuic</em:creator>
 	<em:description>Open the menu when you select text on browser. And display page in tiny browsers when select these menus.</em:description>
 	<em:bootstrap>true</em:bootstrap>
@@ -30,7 +30,7 @@
 		<Description>
 			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 			<em:minVersion>17.0</em:minVersion>
-			<em:maxVersion>20.0a2</em:maxVersion>
+			<em:maxVersion>21.0a2</em:maxVersion>
 		</Description>
 	</em:targetApplication>
 

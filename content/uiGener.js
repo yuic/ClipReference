@@ -66,6 +66,9 @@ UiGenerCmd.prototype = {
 	// return the url that popup should open
 	getCurrentUrl: function(clip){},	// ... (`ω´)
 
+	// if always popup in minimized = ON, do resize in background.
+	resize: function(clip){},			// (@益@#)
+
 	// 閉じるときにサイズごとに次回開くときの場所を保存する用
 	setLastPosition: function(clip, {left, top}){
 		clip.lastPosX_min = left-2 - clip.popEvtPosX;	// ナゾの2px...
@@ -121,7 +124,7 @@ UiGenerDef.prototype = $extend(new UiGenerCmd(), {
 		var minBtn  = GenerUtils.createToolbarButtonA('minBtn', $LOCALE('pop.tooltip.minimize'));
 			minBtn.addEventListener('command', function(e){
 				Holder.getInstance(clip.uiGenerType).setLastSize(clip, clip.dtpanel.getOuterScreenRect());
-				clip.restuff('UiGenerMin', null, null);
+				clip.restuff('UiGenerMin');
 			}.bind(clip), false);
 
 		// ピン留めボタン
@@ -178,6 +181,7 @@ UiGenerDef.prototype = $extend(new UiGenerCmd(), {
 		}, 100 );
 	},
 	getCurrentUrl: function(clip){ return clip.webLoader.currentUrl(clip); },
+	resize: function(clip){ if(ClipManager.alwaysMinimum) clip.restuff('UiGenerMin'); },
 });
 
 

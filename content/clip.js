@@ -46,16 +46,13 @@ Clip.prototype = {
 	closePopup: function({ignoreGenType, source}){
 		if( (source === this.id )									// clickされたポップアップ以外は閉じろ！
 		 || (!ignoreGenType && this.uiGenerType === 'UiGenerDef')	// 復元されたやつは閉じない
-		 || (this.pinBtn && this.pinBtn.checked ) ) return;			// ピン留めされていれば無条件で閉じない(どうしても閉じるのは設定画面でOKされたとき)
-
-		var metric = this.dtpanel.getOuterScreenRect();
-		if(metric.width === 0) return;	// 貴様はすでに閉じている
+		 || (this.pinBtn && this.pinBtn.checked)					// ピン留めされていれば無条件で閉じない(どうしても閉じるのは設定画面でOKされたとき)
+		 || (this.dtpanel.getOuterScreenRect().width === 0)			// already closed
+		) return;
 
 		this.dtpanel.hidePopup();
 		this.webLoader.clearBrowsPane(this);
-
-		// if always popup in minimized = ON, do resize in background.
-		if( (ClipManager.alwaysMinimum) && (this.uiGenerType === 'UiGenerDef') ) this.restuff('UiGenerMin', null, null);
+		Holder.getInstance(this.uiGenerType).resize(this);
 	},
 
 	// このclipが移動されたかどうか ／ コマンド発火の前提条件として使ってね！
@@ -84,6 +81,6 @@ Clip.prototype = {
 		this.dtpanel.moveTo(x, y);
 		(width && height)
  			? this.dtpanel.sizeTo(width, height)
-			: this.dtpanel.width = this.dtpanel.height = null;
+			: this.dtpanel.width = this.dtpanel.height = '';
 	},
 };
