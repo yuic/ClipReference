@@ -93,28 +93,5 @@ function uninstall(params, reason){
 	if(reason === ADDON_UNINSTALL) attachDbFile().remove(false);
 };
 
-function install(params, reason) {
-	if(reason !== ADDON_UPGRADE) return;
-
-	Services.strings.flushBundles();
-	var file = attachDbFile();
-	var conn = Services.storage.openDatabase(file);
-
-	switch(params.version){
-		case '1.5' :
-			["INSERT INTO 'pref' VALUES('behavior0','1');",
-			 "INSERT INTO 'pref' VALUES('behavior1','2');",
-			 "INSERT INTO 'pref' VALUES('behavior2','4');",
-			 "INSERT INTO 'pref' VALUES('behaviorB','2');",
-			 "INSERT INTO 'pref' VALUES('openTabActivate0','0');",
-			 "INSERT INTO 'pref' VALUES('openTabActivate1','1');",
-			 "INSERT INTO 'pref' VALUES('openTabActivate2','0');",
-			 "INSERT INTO 'pref' VALUES('openTabActivateB','1');",
-			].forEach( function(e){ conn.executeSimpleSQL(e); } );
-			/* break; */
-	}
-
-	conn.close();
-	file = conn = null;
-};
+function install(params, reason) {};
 

@@ -57,17 +57,17 @@ UiGenerCmd.prototype = {
 	optionalBuild: function(clip){ clip.dtpanel.minWidth = clip.dtpanel.minHeight = null; },
 
 	// 閉じるときにサイズごとに次回開くときのサイズを復元する用
-	setLastSize: function(clip, {}){},	// i'm not doing anything! (*`ω´)
+	setLastSize  : dummyN,	// i'm not doing anything! (*`ω´)
 
 	// ポップアップを開くときにバックグラウンドで変更されたサイズ変更を反映させる用
 	// (firefoxがウィンドウごとに管理してるものを上書きするためのもの)
-	adjustSize: function(clip){},		// me too! (`ω´*)
+	adjustSize   : dummyN,	// me too! (`ω´*)
 
 	// return the url that popup should open
-	getCurrentUrl: function(clip){},	// ... (`ω´)
+	getCurrentUrl: dummyN,	// ... (`ω´)
 
-	// if always popup in minimized = ON, do resize in background.
-	resize: function(clip){},			// (@益@#)
+	// if always popup in minimized is ON, change the popup size when closing it.
+	resize       : dummyN,	// (@益@#)
 
 	// 閉じるときにサイズごとに次回開くときの場所を保存する用
 	setLastPosition: function(clip, {left, top}){
@@ -101,7 +101,7 @@ UiGenerMin.prototype = $extend(new UiGenerCmd(), {
 	buildIdList: ['minMnu'],
 	optionalBuild: function(clip){
 		clip.dtpanel.minWidth = clip.dtpanel.minHeight = null;
-		if(clip.pinBtn) clip.pinBtn.checked=false;
+		if(clip.pinBtn) clip.pinBtn.checked = false;
 	},
 	getCurrentUrl: function(clip){
 		return LoaderUtils.composeUrl(DB.getWebQueryStringsById(clip.id).url_script, ClipManager.selectedChars);
@@ -191,8 +191,9 @@ var GenerUtils = {
 		// 掴まれた：　ポップアップ上でのカーソルの相対位置を記憶させ、後はマウスむーぶイベントに任せる
 		element.addEventListener('mousedown', function(e){
 			var bound = clip.dtpanel.getBoundingClientRect();
-			clip.offsetX = e.layerX - bound.left;
-			clip.offsetY = e.layerY - bound.top;
+			var gap = GenerUtils.osGap.pos;
+			clip.offsetX = e.layerX - (bound.left + gap.screenX);
+			clip.offsetY = e.layerY - (bound.top  + gap.screenY);
 			element.style.cursor = '-moz-grabbing';
 			clip.dtpanel.addEventListener('mousemove', mousemoveListener, false);
 		}.bind(clip), false);
@@ -212,9 +213,8 @@ var GenerUtils = {
 
 	// ポップアップした時のURLとキーワードをブラウザで開く
 	openInBrowser: function(url, related, background){
-		Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
-			.getMostRecentWindow("navigator:browser").gBrowser
-				.loadOneTab( url, {relatedToCurrent: (related === '2'), inBackground: (background === '0')} );
+		Services.wm.getMostRecentWindow("navigator:browser").gBrowser
+			.loadOneTab(url, {relatedToCurrent: (related === '2'), inBackground: (background === '0')});
 	},
 
 	// Def用ボタン生成ヘルパ / UiGenerDefの時はdisplayLabelにかかわらずtoolbarbutton-1にする
@@ -243,7 +243,7 @@ var GenerUtils = {
 
 		// open url according to settings of 「Open in browser」 / propaty name is DB value of keys of pref.behaviorX
 		var behaviors = {
-			0: function(){},	// なにもしない
+			0: dummyN,			// なにもしない
 
 			1: function(){		// サイズ切り替え
 				clip.restuff('UiGenerDef', clip.lastWidth, clip.lastHeight);
@@ -268,4 +268,17 @@ var GenerUtils = {
 		behaviors[ prefs[behaviorKey] ]();
 	},
 
+	// close the gap between each OS
+	osGap: dummyN,
+
+};
+
+// inject entity to GenerUtils.osGap along each OS.
+GenerUtils.osGap = {
+	// position of the top and left edges of the window
+	pos: {
+		WINNT : { screenX: 0, screenY: 0 },
+		Linux : $('main-window').boxObject,
+		Darwin: { screenX: 0, screenY: 0 }	// just in case
+	}[Services.appinfo.OS]
 };

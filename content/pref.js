@@ -1,4 +1,5 @@
 var {classes: Cc, interfaces: Ci, utils: Cu} = Components;
+Cu.import('resource://gre/modules/Services.jsm');
 //var log = loger('      P ');
 
 var Pref = {
@@ -39,7 +40,7 @@ var Pref = {
 
 	// 開いてる全gBrowserに設定が変更されたことを通知する
 	notifyUpdated: function(){
-		let wins = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getEnumerator('navigator:browser');
+		let wins = Services.wm.getEnumerator('navigator:browser');
 		while (wins.hasMoreElements()){
 			var dtpanel = wins.getNext().QueryInterface(Ci.nsIDOMWindow).document.getElementById('CLRF_dtpanel');
 			if(dtpanel) dtpanel.dispatchEvent( new CustomEvent("prefclose") );
