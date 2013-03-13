@@ -7,9 +7,14 @@
 	<!ENTITY pref.general.disp.minMoveFree         "最小化状態のポップアップをドラッグで移動可能にする">
 	<!ENTITY pref.general.disp.enableTxtField      "テキストフィールドの文字を選択したときもポップアップする">
 
-	<!ENTITY pref.general.close.caption            "ポップアップが自動的に閉じるタイミング">
-	<!ENTITY pref.general.close.description1       "ポップアップからカーソルが離れた状態で">
-	<!ENTITY pref.general.close.description2       "ミリ秒経過したら閉じる">
+	<!ENTITY pref.general.timing.caption            "開閉タイミング">
+	<!ENTITY pref.general.timing.open               "ポップアップを開くタイミング">
+	<!ENTITY pref.general.timing.open.key           "キー">
+	<!ENTITY pref.general.timing.open.selecttext    "文字列を選択する">
+	<!ENTITY pref.general.timing.open.presskey      "文字列を選択してから特定のキーを押す">
+	<!ENTITY pref.general.timing.open.holdkey       "特定のキーを押したまま文字列を選択する">
+	<!ENTITY pref.general.timing.close.description1 "ポップアップからカーソルが離れた状態で">
+	<!ENTITY pref.general.timing.close.description2 "ミリ秒経過したら閉じる">
 
 	<!ENTITY pref.general.behavior.caption         "最小化されたポップアップをクリックしたときの挙動">
 	<!ENTITY pref.general.behavior.mousebutton     "クリックするボタン">

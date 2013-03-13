@@ -4,7 +4,7 @@
 	<em:id>clipreference2_y@kitori.umauma</em:id>
 	<em:type>2</em:type>
 	<em:name>Clip Reference</em:name>
-	<em:version>1.6</em:version>
+	<em:version>1.7</em:version>
 	<em:creator>yuic</em:creator>
 	<em:description>Open the menu when you select text on browser. And display page in tiny browsers when select these menus.</em:description>
 	<em:bootstrap>true</em:bootstrap>

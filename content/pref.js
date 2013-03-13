@@ -18,7 +18,7 @@ var Pref = {
 
 		// 'input'とか'change'だと値を変えてからツリーをいじった時に、発火が間に合わない
 		['keyup', 'change', 'command'].forEach( function(ev){
-			$('detailArea').addEventListener(ev, function(e){ Pref.itemChanged(e) }, false);
+			$('detailArea').addEventListener(ev, function(e){ Pref.itemChanged(e); }, false);
 		});
 	},
 
@@ -42,8 +42,8 @@ var Pref = {
 	notifyUpdated: function(){
 		let wins = Services.wm.getEnumerator('navigator:browser');
 		while (wins.hasMoreElements()){
-			var dtpanel = wins.getNext().QueryInterface(Ci.nsIDOMWindow).document.getElementById('CLRF_dtpanel');
-			if(dtpanel) dtpanel.dispatchEvent( new CustomEvent("prefclose") );
+			var mark = wins.getNext().QueryInterface(Ci.nsIDOMWindow).document.getElementById('appcontent');
+			if(mark) mark.dispatchEvent( new CustomEvent("prefclose") );
 		}
 	},
 
@@ -227,7 +227,7 @@ var Pref = {
 											   : $(elm).value   =   currentItem[ VIEW_COL_MAP[elm] ];
 			  };
 		['xpath', 'width', 'height', 'posX_def', 'posY_def', 'defaultZoom'].concat(defField).forEach(switchFunc);
-		Pref.switchZoomDisable();
+		Pref.switchDisableZoom();
 	},
 
 	// 詳細ペインが変更された／cmdItemsに変更を反映
@@ -237,12 +237,12 @@ var Pref = {
 		Pref.cmdItems[curIdx][ VIEW_COL_MAP[e.target.id] ] = ( e.target.value || (e.target.checked?1:0) );
 		if(e.target.id === 'xpath'){
 			Pref.cmdItems[curIdx][ VIEW_COL_MAP[e.target.id] ] = e.target.value;
-			Pref.switchZoomDisable();
+			Pref.switchDisableZoom();
 		}
 	},
 
 	// xpathの入力状況によってzoomのdisabledを切り替え
-	switchZoomDisable: function(){
+	switchDisableZoom: function(){
 		var curIdx = treeView.selection.currentIndex;
 		if(curIdx<0) return;
 		$('defaultZoom').disabled = ( $('xpath').value.length > 0 || Pref.cmdItems[curIdx].isScript === 1 );
@@ -254,8 +254,27 @@ var Pref = {
 		$('openTabActivate' + T.id.charAt(T.id.length-1)).disabled = !(T.value === '2' || T.value === '3');
 	},
 
+	// create a key text for display from entered key strokes
+	capturekey: function(e){
+		if( [9, 16, 17, 18].indexOf(e.keyCode) > -1 ) return;	// tab, shift, ctrl, alt
+		e.preventDefault();
+
+		var modifier = '';
+		if(e.ctrlKey)  modifier += 'ctrl + ';
+		if(e.shiftKey) modifier += 'shift + ';
+		if(e.altKey)   modifier += 'alt + ';
+
+		// こんな感じになる  :  shift + alt + Q
+		// 非表示文字はこんな:  ctrl + RETURN
+		e.target.value = modifier + EventKey[e.keyCode].replace('VK_', '');
+	},
+
 };
 
+// interchange. {DOM_VK_CONTROL : 17} -> {17 : VK_CONTROL}
+// キーストロークから表示用の文字列を取り出す用
+var EventKey = {};
+for(var p in window.KeyEvent) EventKey[ window.KeyEvent[p] ] = p.replace('DOM_', '');
 
 // associate field-id with db-column name
 var VIEW_COL_MAP = {
@@ -318,7 +337,7 @@ var treeView = {
 	setCellValue: function(row, col, value){
 		Pref.cmdItems[row].isScript = (value === 'true')?1:0;
 		this.treebox.invalidate();
-		Pref.switchZoomDisable();
+		Pref.switchDisableZoom();
 	},
 
 	getImageSrc: function(row,col){ return ( Pref.cmdItems[row][ VIEW_COL_MAP[col.id] ]) },

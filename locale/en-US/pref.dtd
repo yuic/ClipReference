@@ -1,29 +1,34 @@
 <!ENTITY pref.window.title "clipreference options">
 
 <!ENTITY pref.general.paneLabel "General">
-	<!ENTITY pref.general.disp.caption             "View">
+	<!ENTITY pref.general.disp.caption             "Display">
 	<!ENTITY pref.general.disp.alwaysMinimum       "Always pop up in minimized state">
 	<!ENTITY pref.general.disp.displayLabel        "Displays the name of menu when the popup is minimized">
-	<!ENTITY pref.general.disp.minMoveFree         "Enable to move the minimized popup by drag">
+	<!ENTITY pref.general.disp.minMoveFree         "Enable to drag minimized popup">
 	<!ENTITY pref.general.disp.enableTxtField      "Also pop up when select characters in the input field">
 
-	<!ENTITY pref.general.close.caption            "The popup closes timing (Only those that has minimized)">
-	<!ENTITY pref.general.close.description1       "Close after">
-	<!ENTITY pref.general.close.description2       "milli-seconds from the cursor moves away from the popup">
+	<!ENTITY pref.general.timing.caption            "Opening-closing timing">
+	<!ENTITY pref.general.timing.open               "Trigger to popup">
+	<!ENTITY pref.general.timing.open.key           "Key">
+	<!ENTITY pref.general.timing.open.selecttext    "Select the string">
+	<!ENTITY pref.general.timing.open.presskey      "Press the specified key after select the string">
+	<!ENTITY pref.general.timing.open.holdkey       "Select the string while hold down the specified key">
+	<!ENTITY pref.general.timing.close.description1 "Close after">
+	<!ENTITY pref.general.timing.close.description2 "milli-seconds from the cursor moves away from the popup">
 
-	<!ENTITY pref.general.behavior.caption         "Behavior of clicking a minimized popup ">
+	<!ENTITY pref.general.behavior.caption         "Behavior of clicking a minimized popup">
 	<!ENTITY pref.general.behavior.mousebutton     "Clicked mouse button">
 	<!ENTITY pref.general.behavior.behavior        "Behavior">
 	<!ENTITY pref.general.behavior.activatetab     "Activate new tab">
 	<!ENTITY pref.general.behavior.primarybutton   "Primary button">
 	<!ENTITY pref.general.behavior.middlebutton    "Middle button">
 	<!ENTITY pref.general.behavior.secondarybutton "Secondary button">
-	<!ENTITY pref.general.behavior.changeSize      "Switching the size of popup">
+	<!ENTITY pref.general.behavior.changeSize      "Switch the size of popup">
 	<!ENTITY pref.general.behavior.newtabright     "Open in new tab (Right of current)">
 	<!ENTITY pref.general.behavior.newtabend       "Open in new tab (The end)">
 	<!ENTITY pref.general.behavior.newwindow       "Open in new window">
 
-	<!ENTITY pref.general.behaviorB.caption        "Behavior of clicking 'Open in browser' button">
+	<!ENTITY pref.general.behaviorB.caption        "Behavior of clicking [Open in browser] button">
 	<!ENTITY pref.general.behaviorB.description    "*Those settings will be also applied to the behavior in middle-clicking a link on the popup.">
 
 	<!ENTITY pref.general.restore.caption          "Restore the default setting">
@@ -41,17 +46,17 @@
 	<!ENTITY pref.menu.tree.delete                 "x">
 
 	<!ENTITY pref.menu.detail.pos.caption          "Display position">
-	<!ENTITY pref.menu.detail.pos.minimized        "In minimized">
-	<!ENTITY pref.menu.detail.pos.min.description  "relative to the mouse cursor">
+	<!ENTITY pref.menu.detail.pos.minimized        "In minimized state">
+	<!ENTITY pref.menu.detail.pos.min.description  "Relative position to the mouse cursor">
 	<!ENTITY pref.menu.detail.pos.min.rightward    "Rightward:">
 	<!ENTITY pref.menu.detail.pos.min.downward     "Downward:">
 
-	<!ENTITY pref.menu.detail.pos.expand           "In expanded">
-	<!ENTITY pref.menu.detail.pos.exp.description  "absolutely position on the screen">
+	<!ENTITY pref.menu.detail.pos.expand           "In expanded state">
+	<!ENTITY pref.menu.detail.pos.exp.description  "Absolute position on the screen">
 	<!ENTITY pref.menu.detail.pos.exp.rightward    "Rightward:">
 	<!ENTITY pref.menu.detail.pos.exp.downward     "Downward:">
 
-	<!ENTITY pref.menu.detail.size.caption         "Dimensions In expanded">
+	<!ENTITY pref.menu.detail.size.caption         "Dimensions in expanded">
 	<!ENTITY pref.menu.detail.size.width           "Width:">
 	<!ENTITY pref.menu.detail.size.height          "Height:">
 

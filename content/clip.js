@@ -28,9 +28,7 @@ Clip.prototype = {
 		this.popEvtPosX = e.screenX;
 		this.popEvtPosY = e.screenY;
 
-		// pinされててsyncされてなければロードしない
-		if( (this.sycBtn && this.sycBtn.getAttribute('checked'))
-		|| !(this.pinBtn && this.pinBtn.getAttribute('checked')) ) this.webLoader.load(this);
+		this.reloadPopup(e);
 
 		// 開く
 		var gener = Holder.getInstance(this.uiGenerType);
@@ -40,6 +38,12 @@ Clip.prototype = {
 
 		// 移動検知用変数更新 ／ 時間経過で閉じるときの判断用
 		this.updateLastBound();
+	},
+
+	// reload web page on this popup when sync button is ON (also means pin button is on) or pin button is OFF
+	reloadPopup: function(e){
+		if( (this.sycBtn && this.sycBtn.getAttribute('checked'))
+		|| !(this.pinBtn && this.pinBtn.getAttribute('checked')) ) this.webLoader.load(this);
 	},
 
 	// ポップアップを閉じる

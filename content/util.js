@@ -35,6 +35,8 @@ var PrefsKeys = [
 	['displayLabel'    , 'displayLabel'    , '1'],
 	['minMoveFree'     , 'minMoveFree'     , '1'],
 	['menuToClose'     , 'menuToClose'          ],
+	['openTrigger'     , 'openTrigger'          ],
+	['triggerKey'      , 'triggerKey'           ],
 ];
 
 // append delayed load keys into PrefsKeys
