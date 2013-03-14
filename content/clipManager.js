@@ -159,9 +159,7 @@ var ClipManager = {
 var TriggerSwitcher = {
 	reOpen : function(e){ ClipManager.reOpen(e); },
 	notify : function(e){ ClipManager.notify(e); },
-	notifyClose : function(e){
-		dump('close\n');
-		ClipManager.notifyClose({ignoreGenType: true}); },
+	notifyClose : function(e){ ClipManager.notifyClose({ignoreGenType: true}); },
 
 	// return object that has event fired points of x and y
 	setScreenXY : function(e){ return {screenX: e.screenX, screenY: e.screenY}; },
@@ -232,8 +230,7 @@ $extend(TriggerSwitcher, {
 			'mousedown': TriggerSwitcher.notifyClose,
 			'mouseup'  : function(e){
 				ClipManager.endPoint = TriggerSwitcher.setScreenXY(e);
-				ClipManager.selectedChars = ClipManager.getSelectedChars();
-				ClipManager.notifyReload(e);
+				if(ClipManager.selectedChars = ClipManager.getSelectedChars()) ClipManager.notifyReload(e);
 			},
 		},
 		//  1. no characters are selected
@@ -254,7 +251,7 @@ $extend(TriggerSwitcher, {
 			},
 			'mouseup'  : function(e){
 				ClipManager.endPoint = TriggerSwitcher.setScreenXY(e);
-				ClipManager.selectedChars = ClipManager.getSelectedChars();
+				if(ClipManager.selectedChars = ClipManager.getSelectedChars()) ClipManager.notifyReload(e);
 				ClipManager.reOpen(e);
 			},
 		},

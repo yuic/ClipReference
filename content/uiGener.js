@@ -132,7 +132,9 @@ UiGenerDef.prototype = $extend(new UiGenerCmd(), {
 
 		// ブラウザと同期ボタン
 		clip.sycBtn = GenerUtils.createToolbarButtonA('sycBtn', $LOCALE('pop.tooltip.sync'), null, {type: 'checkbox'});
-		clip.sycBtn.addEventListener('command', function(e){ if(clip.sycBtn.checked) clip.webLoader.load(clip); }, false);
+		clip.sycBtn.addEventListener('command', function(e){
+			if(clip.sycBtn.checked && ClipManager.selectedChars) clip.webLoader.load(clip);
+		}, false);
 
 		// スペーサーと 、掴んで移動するためのイベント処理
 		var spacer = $EL( 'spacer', {id: 'spacer', width: 30, flex: 1}, [], {cursor: '-moz-grab'} );

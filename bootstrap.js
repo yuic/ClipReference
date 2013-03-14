@@ -93,14 +93,14 @@ function uninstall(params, reason){
 	if(reason === ADDON_UNINSTALL) attachDbFile().remove(false);
 };
 
-function install(params, reason) {
+function install(params, reason){
 	if(reason !== ADDON_UPGRADE) return;
 
 	var file = attachDbFile();
 	var conn = Services.storage.openDatabase(file);
 
 	["INSERT INTO 'pref' VALUES('openTrigger','0');",
-	 "INSERT INTO 'pref' VALUES('triggerKey','ctrl + shift + V');"
+	 "INSERT INTO 'pref' VALUES('triggerKey','alt + Q');"
 	].forEach( function(e){ conn.executeSimpleSQL(e); } );
 
 	conn.close();
