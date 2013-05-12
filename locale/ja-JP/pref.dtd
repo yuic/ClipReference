@@ -6,6 +6,11 @@
 	<!ENTITY pref.general.disp.displayLabel        "最小化状態のポップアップにメニュー名を表示する">
 	<!ENTITY pref.general.disp.minMoveFree         "最小化状態のポップアップをドラッグで移動可能にする">
 	<!ENTITY pref.general.disp.enableTxtField      "テキストフィールドの文字を選択したときもポップアップする">
+	<!ENTITY pref.general.disp.toolDirection       "ポップアップ上のツールバー位置">
+	<!ENTITY pref.general.disp.toolDir.top         "上">
+	<!ENTITY pref.general.disp.toolDir.right       "右">
+	<!ENTITY pref.general.disp.toolDir.bottom      "下">
+	<!ENTITY pref.general.disp.toolDir.left        "左">
 
 	<!ENTITY pref.general.timing.caption            "開閉タイミング">
 	<!ENTITY pref.general.timing.open               "ポップアップを開くタイミング">
@@ -30,12 +35,6 @@
 
 	<!ENTITY pref.general.behaviorB.caption        "「ブラウザで開く」ボタン押下時の挙動">
 	<!ENTITY pref.general.behaviorB.description    "*この設定はポップアップ上のリンクをホイールクリックしたときの動作にも適用されます。">
-
-	<!ENTITY pref.general.restore.caption          "デフォルトの復元">
-	<!ENTITY pref.general.restore.button           "復元">
-	<!ENTITY pref.general.restore.protect          "誤操作保護">
-	<!ENTITY pref.general.restore.description1     "現在の設定を破棄し、配布時の状態を復元します。">
-	<!ENTITY pref.general.restore.description2     "この操作はキャンセルできません。">
 
 
 <!ENTITY pref.menu.paneLabel "ポップアップ項目">
@@ -69,6 +68,15 @@
 
 	<!ENTITY pref.menu.detailtoggle                "ポップアップの詳細">
 	<!ENTITY pref.menu.description                 "URL/SCRIPTフィールドが空の項目は登録されません">
+
+
+<!ENTITY pref.misc.paneLabel "復元">
+	<!ENTITY pref.misc.restore.caption             "デフォルトの復元">
+	<!ENTITY pref.misc.restore.button              "復元">
+	<!ENTITY pref.misc.restore.protect             "誤操作保護">
+	<!ENTITY pref.misc.restore.description1        "現在の設定を破棄し、配布時の状態を復元します。">
+	<!ENTITY pref.misc.restore.description2        "この操作はキャンセルできません。">
+
 
 <!ENTITY editor.window.title "スクリプトの編集">
 

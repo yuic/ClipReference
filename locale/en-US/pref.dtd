@@ -6,6 +6,11 @@
 	<!ENTITY pref.general.disp.displayLabel        "Displays the name of menu when the popup is minimized">
 	<!ENTITY pref.general.disp.minMoveFree         "Enable to drag minimized popup">
 	<!ENTITY pref.general.disp.enableTxtField      "Also pop up when select characters in the input field">
+	<!ENTITY pref.general.disp.toolDirection       "The toolbar position on the popup">
+	<!ENTITY pref.general.disp.toolDir.top         "Top">
+	<!ENTITY pref.general.disp.toolDir.right       "Right">
+	<!ENTITY pref.general.disp.toolDir.bottom      "Bottom">
+	<!ENTITY pref.general.disp.toolDir.left        "Left">
 
 	<!ENTITY pref.general.timing.caption            "Opening-closing timing">
 	<!ENTITY pref.general.timing.open               "Trigger to popup">
@@ -30,12 +35,6 @@
 
 	<!ENTITY pref.general.behaviorB.caption        "Behavior of clicking [Open in browser] button">
 	<!ENTITY pref.general.behaviorB.description    "*Those settings will be also applied to the behavior in middle-clicking a link on the popup.">
-
-	<!ENTITY pref.general.restore.caption          "Restore the default setting">
-	<!ENTITY pref.general.restore.button           "Restore">
-	<!ENTITY pref.general.restore.protect          "Protect from wrong operation">
-	<!ENTITY pref.general.restore.description1     "Discard current settings and restore the default settings.">
-	<!ENTITY pref.general.restore.description2     "This operation is not cancelable.">
 
 
 <!ENTITY pref.menu.paneLabel "Popup items">
@@ -69,6 +68,16 @@
 
 	<!ENTITY pref.menu.detailtoggle                "Detail of a popup">
 	<!ENTITY pref.menu.description                 "The item will not be registered if 'URL/SCRIPT' field is empty.">
+
+
+<!ENTITY pref.misc.paneLabel "Restore">
+	<!ENTITY pref.misc.restore.caption             "Restore the default setting">
+	<!ENTITY pref.misc.restore.button              "Restore">
+	<!ENTITY pref.misc.restore.protect             "Protect from wrong operation">
+	<!ENTITY pref.misc.restore.description1        "Discard current settings and restore the default settings.">
+	<!ENTITY pref.misc.restore.description2        "This operation is not cancelable.">
+
+
 
 <!ENTITY editor.window.title "Edit a script">
 

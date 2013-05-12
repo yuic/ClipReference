@@ -13,7 +13,6 @@
 
 	<!-- 一般ペイン -->
 	<prefpane id="generalPane" label="&pref.general.paneLabel;">
-	<notificationbox id="boxNotifyG" flex="1">
 
 		<!-- 表示のしかた -->
 		<groupbox align="start">
@@ -22,6 +21,17 @@
 			<checkbox id="displayLabel"   label="&pref.general.disp.displayLabel;"/>
 			<checkbox id="minMoveFree"    label="&pref.general.disp.minMoveFree;"/>
 			<checkbox id="enableTxtField" label="&pref.general.disp.enableTxtField;"/>
+			<hbox align="center">
+				<label value="&pref.general.disp.toolDirection;:"/>
+				<menulist id="toolDir" sizetopopup="always">
+					<menupopup>
+						<menuitem label="&pref.general.disp.toolDir.top;"    value="0" />
+						<menuitem label="&pref.general.disp.toolDir.right;"  value="1" />
+						<menuitem label="&pref.general.disp.toolDir.bottom;" value="2" />
+						<menuitem label="&pref.general.disp.toolDir.left;"   value="3" />
+					</menupopup>
+				</menulist>
+			</hbox>
 		</groupbox>
 
 		<!-- 閉じるタイミング -->
@@ -134,27 +144,6 @@
 			<description>&pref.general.behaviorB.description;</description>
 		</groupbox>
 
-		<spacer height="15" />
-
-		<!-- デフォルトの復元 -->
-		<groupbox>
-			<caption label="&pref.general.restore.caption;"/>
-			<hbox align="center">
-				<button id="restoreBtn" image="chrome://clipreference/content/icon/locked_g.ico" label=" &pref.general.restore.button;" type="menu-button" oncommand="Pref.doRestore(event);">
-					<menupopup >
-						<menuitem id="restoreGuard" type="checkbox" checked="true"
-							label="&pref.general.restore.protect;" oncommand="Pref.guardRestore(event);"/>
-					</menupopup>
-				</button>
-				<spacer width="20" />
-				<vbox >
-					<label value="&pref.general.restore.description1;" />
-					<label value="&pref.general.restore.description2;" />
-				</vbox>
-			</hbox>
-		</groupbox>
-
-	</notificationbox>
 	</prefpane>
 
 	<!-- メニュー項目ペイン -->
@@ -164,7 +153,7 @@
 		<!-- メニュー項目ツリー -->
 		<groupbox flex="1">
 			<caption label="&pref.menu.tree.caption;"/>
-			<tree id="cmdtree" flex="1" editable="true" enableColumnDrag="true" seltype="single" width="510" height="430"
+			<tree id="cmdtree" flex="1" editable="true" enableColumnDrag="true" seltype="single" width="510"
 					onselect="Pref.itemSelected(event);" onmousemove="treeView.moveCursor(event);">
 				<treecols>
 					<treecol id="icon" flex="1"/>								<splitter class="tree-splitter" />
@@ -268,6 +257,28 @@
 		</hbox>
 
 	</notificationbox>
+	</prefpane>
+
+	<!-- 雑 -->
+	<prefpane id="miscPane" label="&pref.misc.paneLabel;" flex="1" >
+		<!-- デフォルトの復元 -->
+		<groupbox>
+			<caption label="&pref.misc.restore.caption;"/>
+			<hbox align="center">
+				<button id="restoreBtn" label=" &pref.misc.restore.button;" type="menu-button" image="chrome://clipreference/content/icon/locked_g.ico" oncommand="Pref.doRestore(event);">
+					<menupopup >
+						<menuitem id="restoreGuard" type="checkbox" checked="true"
+							label="&pref.misc.restore.protect;" oncommand="Pref.guardRestore(event);"/>
+					</menupopup>
+				</button>
+				<spacer width="20" />
+				<vbox >
+					<label value="&pref.misc.restore.description1;" />
+					<label value="&pref.misc.restore.description2;" />
+				</vbox>
+			</hbox>
+			<hbox><notificationbox id="boxNotifyG" flex="0" /><spacer flex="1"/></hbox>
+		</groupbox>
 	</prefpane>
 
 	<script type="application/x-javascript" src="chrome://clipreference/content/util.js" />

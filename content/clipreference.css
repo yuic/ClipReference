@@ -11,11 +11,15 @@
 
 /* [preference] pane tab */
 #CLRF_prefWin [pane=generalPane] {
-	list-style-image: url("chrome://clipreference/content/icon/circuit_g.png"); 
+	list-style-image: url("chrome://browser/skin/preferences/Options.png"); 
+	-moz-image-region: rect(0, 32px,  32px, 0);
 }
 #CLRF_prefWin [pane=menuitemsPane] {
 	list-style-image: url("chrome://clipreference/content/icon/icons.png");
 	-moz-image-region: rect( 0px, 96px, 32px, 64px);
+}
+#CLRF_prefWin [pane=miscPane] {
+	list-style-image: url("chrome://browser/content/abouthome/restore-large.png"); 
 }
 
 /* [preference] menuitem tab  tree decoration */

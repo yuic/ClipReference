@@ -4,9 +4,9 @@
 	<em:id>clipreference2_y@kitori.umauma</em:id>
 	<em:type>2</em:type>
 	<em:name>Clip Reference</em:name>
-	<em:version>1.7</em:version>
+	<em:version>1.8</em:version>
 	<em:creator>yuic</em:creator>
-	<em:description>Open the menu when you select text on browser. And display page in tiny browsers when select these menus.</em:description>
+	<em:description>This addon Opens the customized menu when you select any text on browser. By selecting the menu, you can open the search result page on the popped up browser or other ways.</em:description>
 	<em:bootstrap>true</em:bootstrap>
 	<em:optionsURL>chrome://clipreference/content/pref.xul</em:optionsURL>
 	<em:iconURL>chrome://clipreference/content/icon/circuit_g.png</em:iconURL>
@@ -15,13 +15,13 @@
 		<Description>
 			<em:locale>ja</em:locale>
 			<em:name>Clip Reference</em:name>
-			<em:description>テキスト選択時にメニューを表示します。メニューを選択すると内容を小さなブラウザで表示します。</em:description>
+			<em:description>テキスト選択時にメニューを表示します。メニューを選択するとwebページを小さなブラウザで表示します。</em:description>
 			<em:creator>yuic</em:creator>
 		</Description>
 		<Description>
 			<em:locale>en-US</em:locale>
 			<em:name>Clip Reference</em:name>
-			<em:description>Open the menu when you select text on browser. And display page in tiny browser when select these menus.</em:description>
+			<em:description>This addon Opens the customized menu when you select any text on browser. By selecting the menu, you can open the search result page on the popped up browser or other ways.</em:description>
 			<em:creator>yuic</em:creator>
 		</Description>
 	</em:localized>
@@ -30,7 +30,7 @@
 		<Description>
 			<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 			<em:minVersion>17.0</em:minVersion>
-			<em:maxVersion>21.0a2</em:maxVersion>
+			<em:maxVersion>22.0a2</em:maxVersion>
 		</Description>
 	</em:targetApplication>
 

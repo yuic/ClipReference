@@ -98,12 +98,8 @@ function install(params, reason){
 
 	var file = attachDbFile();
 	var conn = Services.storage.openDatabase(file);
-
-	["INSERT INTO 'pref' VALUES('openTrigger','0');",
-	 "INSERT INTO 'pref' VALUES('triggerKey','alt + Q');"
-	].forEach( function(e){ conn.executeSimpleSQL(e); } );
-
-	conn.close();
+		conn.executeSimpleSQL("INSERT INTO 'pref' VALUES('toolDir','2');");
+		conn.close();
 	file = conn = null;
 };
 

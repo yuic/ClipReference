@@ -37,6 +37,7 @@ var PrefsKeys = [
 	['menuToClose'     , 'menuToClose'          ],
 	['openTrigger'     , 'openTrigger'          ],
 	['triggerKey'      , 'triggerKey'           ],
+	['toolDir'         , 'toolDir'              ],
 ];
 
 // append delayed load keys into PrefsKeys
@@ -62,6 +63,5 @@ function $evaluateXPath(aNode, aExpr) {
 	while (res = result.iterateNext()) found.push(res);
 	return found;
 };
-var dummy0 = function(){return 0;};
 var dummyF = function(){return false;};
 var dummyN = function(){};

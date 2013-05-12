@@ -20,15 +20,14 @@ var UiGenerCmd = function(){};
 UiGenerCmd.prototype = {
 	// ui作るかhiddenになってるものを再表示する
 	buildUi: function(clip){
-		// display target elements will be 'hidden = false', otherwise 'true'.
+		// display the target element will be 'hidden = false', otherwise 'true'.
 		var children = clip.dtpanel.childNodes;
 		var find = false;
-		for( var i=0, iLim=children.length; i<iLim; i++ )
-			( children[i].hidden = !(this.buildIdList.indexOf(children[i].id) > -1) ) ? void(0) : find = true;
+		for(var i=0, child; child=children[i++];)
+			if( !(child.hidden = !(this.buildIdList === child.id)) ) find = true;
 
 		// なければcreateUiする
-		if(!find)
-			for( var i=0, parts=this.createUi(clip), iLim=parts.length; i<iLim; clip.dtpanel.appendChild(parts[i]), i++ );
+		if(!find) clip.dtpanel.appendChild( this.createUi(clip) );
 
 		// 個別にしたい事があればどうぞ
 		this.optionalBuild(clip);
@@ -38,6 +37,7 @@ UiGenerCmd.prototype = {
 	createUi: function(clip){
 		var {favicon, name} = DB.getLabelDataById(clip.id);
 		var cmdBtn = GenerUtils.createToolbarButton( 'cmdBtn', name, favicon, (ClipManager.displayLabel ? {label: name} : null) );
+			cmdBtn.style.position = 'absolute';
 
 		cmdBtn.addEventListener('click', function(e){
 			if( clip.isMoved() ) return;
@@ -50,7 +50,7 @@ UiGenerCmd.prototype = {
 		}, false);
 
 		if(ClipManager.minMoveFree) GenerUtils.attachMouseEvents(cmdBtn, clip);	// 掴んで移動するためのイベント処理
-		return [cmdBtn];
+		return cmdBtn;
 	},
 
 	// ui生成中に属性いじりたい時用
@@ -76,12 +76,13 @@ UiGenerCmd.prototype = {
 	},
 
 	// このジェネレータが表示させるべきコンテナのID
-	buildIdList: ['cmdBtn'],
+	buildIdList: 'cmdBtn',
 
 	// 開くときにサイズごとに前回閉じた場所を復元する用
 	getPopupPosition: function(clip){
 		return { x:clip.lastPosX_min + clip.popEvtPosX, y:clip.lastPosY_min + clip.popEvtPosY};
 	},
+	screenGapY: 1,
 };
 
 
@@ -93,12 +94,13 @@ UiGenerMin.prototype = $extend(new UiGenerCmd(), {
 
 		// 最小化状態のポップアップの上にあるボタン
 		var minMnu = GenerUtils.createToolbarButton( 'minMnu', name, favicon, (ClipManager.displayLabel ? {label: name} : null) );
+			minMnu.style.position = 'absolute';
 			minMnu.addEventListener('click', function(e){ if( !clip.isMoved() ) GenerUtils.runMenu(e, clip, true); }.bind(clip), false);
 
 		if(ClipManager.minMoveFree) GenerUtils.attachMouseEvents(minMnu, clip);
-		return [minMnu];
+		return minMnu;
 	},
-	buildIdList: ['minMnu'],
+	buildIdList: 'minMnu',
 	optionalBuild: function(clip){
 		clip.dtpanel.minWidth = clip.dtpanel.minHeight = null;
 		if(clip.pinBtn) clip.pinBtn.checked = false;
@@ -137,29 +139,60 @@ UiGenerDef.prototype = $extend(new UiGenerCmd(), {
 		}, false);
 
 		// スペーサーと 、掴んで移動するためのイベント処理
-		var spacer = $EL( 'spacer', {id: 'spacer', width: 30, flex: 1}, [], {cursor: '-moz-grab'} );
+		var spacer = $EL( 'spacer', {id: 'spacer', flex: 1}, null, {cursor: '-moz-grab'} );
 		GenerUtils.attachMouseEvents(spacer, clip);
 
-		// 右下のサイズ変更するやつ
-		var resizer = $EL('resizer', {id: 'resizer', dir: 'bottomright'});
-			resizer.addEventListener('mouseup', function(e){
-				Holder.getInstance(clip.uiGenerType).setLastSize(clip, clip.dtpanel.getOuterScreenRect());
-				ClipManager.saveAppData(clip.id);
-			}, false);	// 苦肉のサク２
-
-		var toolbox = $EL('hbox', {id: 'toolbox'}, [
-			clip.pinBtn,
-			clip.sycBtn,
-			opnBtn,
-			minBtn,
-			clip.webLoader.createOptional(clip),	// 倍率変更コンボボックス(iframe(browser)以外はdummy)
+		var toolbox = $EL(Directions.hvBox[ClipManager.toolDir], {id: 'toolbox'}, [
+			// align指定用のハコ / 上のハコでalign指定するとspacerをつかめなくなる
+			$EL(Directions.hvBox[ClipManager.toolDir], {align: 'center'}, [
+				clip.pinBtn,
+				clip.sycBtn,
+				opnBtn,
+				minBtn,
+				clip.webLoader.createOptional(clip),	// 倍率変更コンボボックス(iframe(browser)以外はdummy)
+			]),
 			spacer,
-			$EL('hbox', {align: 'center'} , [$EL('image', {id: 'loadingicon', src: ''})] ),
-			resizer
+			$EL( Directions.hvBox[ClipManager.toolDir], {align: 'center'} , [ $EL('image', {id: 'loadingicon', src: ''}) ] ),
 		]);
-		return [clip.browsPane, toolbox];
+
+		var contents = [
+			{outer: 'vbox', elm1: toolbox,        elm2: clip.browsPane},	// top
+			{outer: 'hbox', elm1: clip.browsPane, elm2: toolbox       },	// right
+			{outer: 'vbox', elm1: clip.browsPane, elm2: toolbox       },	// bottom
+			{outer: 'hbox', elm1: toolbox,        elm2: clip.browsPane},	// left
+		][ClipManager.toolDir];
+
+		var overflowH = {overflow: 'hidden'};
+		var expanded = $EL('vbox', {flex: 1, id: 'expanded'}, [
+			// top resizers
+			$EL('hbox', {height: 2}, [
+				$EL('resizer', {dir: 'topleft'}),
+				$EL('resizer', {dir: 'top', flex: 1}),
+				$EL('resizer', {dir: 'topright'}),
+			], overflowH),
+
+			// left and right resizers, browser and toolbarbuttons
+			$EL('hbox', {flex: 1, width: 25}, [
+				$EL('hbox'        , {width: 2}, [ $EL('resizer', {dir: 'left'}) ], overflowH),
+				$EL(contents.outer, {flex : 1}, [ contents.elm1, contents.elm2  ]),
+				$EL('hbox'        , {width: 2}, [ $EL('resizer', {dir: 'right'})], overflowH),
+			], overflowH),
+
+			// bottom resizers
+			$EL('hbox', {height: 2}, [
+				$EL('resizer', {dir: 'bottomleft'}),
+				$EL('resizer', {dir: 'bottom', flex: 1}),
+				$EL('resizer', {dir: 'bottomright'}),
+			], overflowH),
+		]);
+		expanded.addEventListener('mouseup', function(e){
+			if(e.target.tagName !== 'resizer') return;
+			Holder.getInstance(clip.uiGenerType).setLastSize(clip, clip.dtpanel.getOuterScreenRect());
+			ClipManager.saveAppData(clip.id);
+		}, false);	// 苦肉のサク２、３ i've no choice but to capture all fired 'mouseup' on popup
+		return expanded;
 	},
-	buildIdList: ['browspane', 'toolbox'],
+	buildIdList: 'expanded',
 	adjustSize: function(clip){ clip.dtpanel.sizeTo(clip.lastWidth, clip.lastHeight); },
 	setLastSize: function(clip, {width, height}){
 		clip.lastWidth  = width;
@@ -171,9 +204,6 @@ UiGenerDef.prototype = $extend(new UiGenerCmd(), {
 	},
 	getPopupPosition: function(clip){ return { x:clip.lastPosX_def, y:clip.lastPosY_def}; },
 	optionalBuild: function(clip){
-		clip.dtpanel.minWidth = 255;	// これ以上小さくするとリサイザが隠れる
-		clip.dtpanel.minHeight = 35;
-
 		// デフォルト設定適用 / DBアクセスのオーバヘッドをHttpアクセスのオーバヘッドに紛れ込ませてうやむやにする
 		window.setTimeout( function(){
 			var {defaultPin: pin, defaultSync: syc, defaultZoom: zoom } = DB.getDefaultById(clip.id);
@@ -184,6 +214,7 @@ UiGenerDef.prototype = $extend(new UiGenerCmd(), {
 	},
 	getCurrentUrl: function(clip){ return clip.webLoader.currentUrl(clip); },
 	resize: function(clip){ if(ClipManager.alwaysMinimum) clip.restuff('UiGenerMin'); },
+	screenGapY: 3,
 });
 
 
@@ -194,8 +225,8 @@ var GenerUtils = {
 		element.addEventListener('mousedown', function(e){
 			var bound = clip.dtpanel.getBoundingClientRect();
 			var gap = GenerUtils.osGap.pos;
-			clip.offsetX = e.layerX - (bound.left + gap.screenX);
-			clip.offsetY = e.layerY - (bound.top  + gap.screenY);
+			clip.offsetX = e.layerX - gap.screenX + 1;	// Xは1px、Yは1pxか2pxずれる(他のテーマだともっとずれる)
+			clip.offsetY = e.layerY - gap.screenY + Holder.getInstance(clip.uiGenerType).screenGapY;
 			element.style.cursor = '-moz-grabbing';
 			clip.dtpanel.addEventListener('mousemove', mousemoveListener, false);
 		}.bind(clip), false);
@@ -271,16 +302,12 @@ var GenerUtils = {
 	},
 
 	// close the gap between each OS
-	osGap: dummyN,
-
-};
-
-// inject entity to GenerUtils.osGap along each OS.
-GenerUtils.osGap = {
-	// position of the top and left edges of the window
-	pos: {
-		WINNT : { screenX: 0, screenY: 0 },
-		Linux : $('main-window').boxObject,
-		Darwin: { screenX: 0, screenY: 0 }	// just in case
-	}[Services.appinfo.OS]
+	osGap: {
+		// position of the top and left edges of the window
+		pos: {
+			WINNT : { screenX: 0, screenY: 0 },
+			Linux : $('main-window').boxObject,
+			Darwin: { screenX: 0, screenY: 0 }	// just in case
+		}[Services.appinfo.OS]
+	},
 };

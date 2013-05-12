@@ -12,7 +12,7 @@ Clip.prototype = {
 			: ( this.uiGenerType = 'UiGenerMin', this.webLoader = (initData.xpath ? new WebLoaderXml() : new WebLoaderIframe()) );
 
 		// Clip生成
-		this.dtpanel = $EL('panel', dtpAttrs.xulAttrs, [], dtpAttrs.xulStyles);
+		this.dtpanel = $EL('panel', dtpAttrs.xulAttrs, null, dtpAttrs.xulStyles);
 		Holder.getInstance(this.uiGenerType).buildUi(this);
 		for(var e in dtpAttrs.listeners) this.dtpanel.addEventListener(e, dtpAttrs.listeners[e].bind(this) , false);
 

@@ -72,11 +72,8 @@ var ClipManager = {
 
 	// 指定IDを持つclipの尺度情報をDBに反映する / 他のclipは無視
 	saveAppData: function(id){
-		for(var i=0, iLim=this.clipPool.length; i<iLim; i++){
-			var clip = this.clipPool[i];
+		for(var i=0, clip; clip = this.clipPool[i++];){
 			if(clip.id !== id) continue;
-
-			DB.init();
 			DB.updateMetrics( [clip.id, clip.lastWidth, clip.lastHeight,
 				clip.lastPosX_def, clip.lastPosY_def, clip.lastPosX_min, clip.lastPosY_min]);
 			break;
@@ -212,11 +209,13 @@ $extend(TriggerSwitcher, {
 		//  1. no characters are selected
 		//  2. not main mouse button
 		//  3. mouseup event without drag (for when anchor tag clicked)
+		//  4. not on scroll bars
 		preventOpen: function(e){
 			return( ( !ClipManager.selectedChars )
 				||  ( e.button !== 0 )
 				||  ( e.type === 'mouseup' && e.screenX === ClipManager.entryPoint.screenX
-						&& e.screenY === ClipManager.entryPoint.screenY )
+										   && e.screenY === ClipManager.entryPoint.screenY )
+				||  ( e.target.scrollLeftMax + e.target.scrollTopMax > 0 )
 			);
 		},
 	},
